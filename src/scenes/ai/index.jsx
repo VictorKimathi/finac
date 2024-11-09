@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import ChatMessages from '../../components/ChatMessage';
 import ChatInput from '../../components/ChatInput';
 import axios from 'axios';
+import { useAuth } from '../../providers/authProvider';
 
 const suggestions = [
   "What's the latest news?",
@@ -14,6 +15,7 @@ const suggestions = [
 ];
 
 const Chat = () => {
+  const { getToken } = useAuth();
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +31,7 @@ const Chat = () => {
         { message: newMessage },
         {
           headers: {
-            Authorization: `Token a01f62ad50e3b6396af09169b66ec073162a8bb6`,
+            Authorization: `Token ${getToken()}`,
             'Content-Type': 'application/json',
           },
         }
